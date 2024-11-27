@@ -115,7 +115,7 @@ void GrammarChecker::parseGlbVars()
     }
 }
 
-bool GrammarChecker::parseVarsList()
+bool GrammarChecker::parseVarsList(std::string scope)
 {
     bool success = false;
     auto id = getToken();
@@ -125,6 +125,10 @@ bool GrammarChecker::parseVarsList()
     {
         if (peekTop().second == "SEMICOLON")
         {
+            if (scope != "")
+            {
+                scopedVars[scope].push_back(id.first);
+            }
             return true;
         }
 
@@ -159,7 +163,7 @@ bool GrammarChecker::parseVarsList()
     return success;
 }
 
-void GrammarChecker::parsePubVars()
+void GrammarChecker::parsePubVars(std::string scope)
 {
     if (peekTop().second != "PUBLIC")
     {
@@ -178,7 +182,7 @@ void GrammarChecker::parsePubVars()
         returnTokens();
         return;
     }
-    bool status = parseVarsList();
+    bool status = parseVarsList(scope);
 
     if (not status)
     {
@@ -266,7 +270,7 @@ void GrammarChecker::parseScope()
 
     // TODO!
 
-    parsePubVars();
+    parsePubVars(ID.first);
     parsePrivVars();
 
     parseStmtList(ID.first);
@@ -347,6 +351,7 @@ void GrammarChecker::parseStmt(std::string scope)
             returnToken(EQUAL);
             returnToken(ID2);
             returnToken(SEMICOLON);
+            cout << "Syntax Error\n";
             return;
         }
         std::pair<std::string, std::string> statement = std::make_pair(ID.first, ID2.first); // get both statements that are equal

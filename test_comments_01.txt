@@ -3,11 +3,7 @@ xyz, it, c4;
 hello {
   public: xyz, it;
   private: c4, dd;
-
-xy;// Comment on a line by itself followed by spaces
-        
-   
- 
+     
   world1 {
     xyz = it;
     c4 = dd;

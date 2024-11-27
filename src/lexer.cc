@@ -210,7 +210,7 @@ Token LexicalAnalyzer::GetToken()
         tmp.token_type = RBRACE;
         for (const auto &data : hey)
         {
-            cout << data;
+            // cout << data;
         }
         return tmp;
     case '/':
@@ -237,7 +237,9 @@ Token LexicalAnalyzer::GetToken()
             return ScanIdOrKeyword();
         }
         else if (input.EndOfInput())
+        {
             tmp.token_type = END_OF_FILE;
+        }
         else
             tmp.token_type = ERROR;
 
@@ -252,19 +254,10 @@ int main()
 
     token = lexer.GetToken();
     token.Print();
-    int i = 0;
     while (token.token_type != END_OF_FILE)
     {
-        // if (i <= 10)
-        // {
-        //     std::cout << "\n";
-        // }
         token = lexer.GetToken();
         token.Print();
-        i++;
     }
-
     grammar_checker.getGrammar();
-
-    // std::cout << "Finished\n";
 }

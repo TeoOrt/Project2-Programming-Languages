@@ -32,9 +32,9 @@ public:
 private:
     void parseProg();
     void parseGlbVars();
-    bool parseVarsList();
+    bool parseVarsList(std::string scope = "");
     void parseScope();
-    void parsePubVars();
+    void parsePubVars(std::string scope = "");
     void parsePrivVars();
     void parseStmtList(std::string scope);
     void parseStmt(std::string scope);

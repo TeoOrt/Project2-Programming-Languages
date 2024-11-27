@@ -1,5 +1,8 @@
 abc;
 
 hello {
+  public:
+  t;
+
   abc = t;
 }
